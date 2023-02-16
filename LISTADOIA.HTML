@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Listado</title>
+    <script>
+      let index = 0;
+    
+      let personajes = [
+        {
+          imagen: "image/gyarados.png",
+          nombre: "dragon",
+          velocidad: "20",
+          resistencia: "5",
+        },
+        {
+          imagen: "image/indoice.png",
+          nombre: "Perro marron",
+          velocidad: "10",
+          resistencia: "3",
+        },
+        {
+          imagen: "image/dragon2.png",
+          nombre: "DRAGONFFUEGO",
+          velocidad: "30",
+          resistencia: "5",
+        },
+        {
+          imagen: "image/gomilla.jpeg",
+          nombre: "gomilla",
+          velocidad: "20",
+          resistencia: "4",
+        },
+      ];
+
+
+   function chartJS() {
+        const titulo = "Velocidad";
+
+        const ctx = document.getElementById("myChart");
+
+        new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: nombres,
+            datasets: [
+              {
+                label: "# de nombres ",
+                data: datos_velocidad,
+                borderWidth: 1,
+              },
+            ],
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true,
+              },
+            },
+            plugins: {
+              title: {
+                display: true,
+                text: titulo,
+              },
+            },
+          },
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <h1>TEAM PABLO</h1>
+   
+  
+    <div id="personaje">
+      <img id="imagen" alt="" />
+      <table>
+        <tr>
+          <td>Nombre:</td>
+          <td><span id="nombre"></span></td>
+        </tr>
+        <tr>
+          <td>Velocidad:</td>
+          <td><span id="velocidad"></span></td>
+        </tr>
+        <tr>
+          <td>Resistencia:</td>
+          <td><span id="resistencia"></span></td>
+        </tr>
+      </table>
+    </div>
+    <input type="button" value="atras" onclick="atras()" />
+    <input type="button" value="siguiente" onclick="siguiente()" />
+
+
+    <script>
+        
+         const nombres = personajes.map((personaje) => personaje.nombre);
+       
+        const datos_velocidad = personajes.map((personaje) => personaje.velocidad );
+        
+         const datos_resistencia = personajes.map((personaje) => personaje.resistencia );
+       
+
+      chartJS();
+      mostrar();
+
+
+    
+      function siguiente() {
+        index = index + 1;
+        if (index > personajes.length) {
+          index = 0;
+        }
+
+        mostrar();
+      }
+
+      function atras() {
+        index = index - 1;
+        if (index < 0) {
+          index = personajes.length - 1;
+        }
+        mostrar();
+      }
+    
+      function mostrar() {
+        document.getElementById("nombre").innerHTML = personajes[index].nombre;
+        document.getElementById("velocidad").innerHTML =
+          personajes[index].velocidad;
+        document.getElementById("resistencia").innerHTML =
+          personajes[index].resistencia;
+
+        var img = document.getElementById("imagen");
+        img.setAttribute("src", personajes[index].imagen);
+      }
+
+    
+      
+
+  
+
+    </script>
+  </body>
+</html>
